@@ -150,9 +150,13 @@ class ItemOrderPlugin extends Omeka_Plugin_AbstractPlugin
         }
                         
         // Do not filter if sorting by browse table header.
-        if (isset($params['sort_field'])) {
-            return;
-        }
+        //unless "sort_field" == "itemorder" in which case user has manually sorted by the ItemOrder sort order
+        if($params['sort_field']!='itemorder')
+        {
+           if (isset($params['sort_field'])) {
+               return;
+           }
+        }    
 
         // Order the collection items by 1) whether an item order exists, 2) the
         // item order, 3) the item ID.
